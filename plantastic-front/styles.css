@@ -4,6 +4,8 @@
     --color-bosque: #3A6644;
     --color-crema: #EDE8DC;
     --color-grafito: #747474;
+    --color-background: #FFFBF2;
+    --color-circle: #D5EBCE;
     --font-principal: 'Figtree', sans-serif;
 }
 
@@ -11,7 +13,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: var(--font-principal);
-    background-color: var(--color-crema);
+    background-color: var(--color-background);
     color: var(--color-grafito);
     padding-top: 80px;
 }
@@ -26,7 +28,7 @@ a {
     top: 0;
     left: 0;
     width: 100%;
-    height: 70px;
+    height: 90px;
     background-color: var(--color-navbar-green);
     display: flex;
     justify-content: space-between;
@@ -92,4 +94,135 @@ a {
     border-radius: 50%;
     padding: 2px 6px;
     font-size: 0.85rem;
+}
+
+/* HERO */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 10%;
+    min-height: calc(100vh - 80px);
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 50%;
+}
+
+.hero-tag {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.75rem;
+    color: var(--color-bosque);
+    font-weight: 700;
+}
+
+.hero-title {
+    font-family: 'Georgia', serif;
+    font-size: 4.2rem;
+    font-weight: 400;
+    color: #1A1A1A;
+    margin: 15px 0 25px 0;
+    line-height: 1.1;
+}
+
+.hero-title .highlight {
+    font-style: italic;
+    color: var(--color-bosque);
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-grafito);
+    line-height: 1.6;
+    margin-bottom: 35px;
+    max-width: 90%;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-family: var(--font-principal);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: var(--color-navbar-green);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-bosque);
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--color-navbar-green);
+    color: var(--color-navbar-green);
+}
+
+.btn-outline:hover {
+    background-color: rgba(22, 56, 39, 0.05);
+    /* very light based on user's navbar hex */
+}
+
+.hero-visual {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.circle-bg {
+    width: 480px;
+    height: 480px;
+    background-color: var(--color-circle);
+    /* Tono verde muy sutil similar a la imagen */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.leaf-icon {
+    font-size: 8rem;
+    transform: rotate(10deg);
+}
+
+.badge {
+    position: absolute;
+    background-color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+    font-family: var(--font-principal);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #1A1A1A;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.badge-1 {
+    top: 60px;
+    left: 100px;
+}
+
+.badge-2 {
+    bottom: 80px;
+    right: 60px;
 }
