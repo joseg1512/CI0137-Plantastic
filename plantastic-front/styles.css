@@ -24,6 +24,7 @@ a {
 }
 
 .navbar {
+    z-index: 100;
     position: fixed;
     top: 0;
     left: 0;
@@ -225,4 +226,68 @@ a {
 .badge-2 {
     bottom: 80px;
     right: 60px;
+}
+
+.ofrecemos {
+    padding: 60px 10%;
+    text-align: center;
+}
+
+.section-tag {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.85rem;
+    color: var(--color-bosque);
+    font-weight: 700;
+    margin-bottom: 50px;
+}
+
+.cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 40px;
+    flex: 1;
+    max-width: 550px;
+    text-align: left;
+    box-shadow: 0 4px 15px #e3e3e3;
+    border: 1px solid #ffffff;
+}
+
+.card:hover {
+    /* acentar sombra */
+    box-shadow: 0 12px 45px #e3e3e3;
+    transition: box-shadow 0.4s;
+
+    .card-title {
+        color: var(--color-bosque);
+    }
+}
+
+.card-icon {
+    font-size: 3rem;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.card-title {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-size: 1.8rem;
+    color: #1A1A1A;
+    margin-bottom: 15px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.card-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-grafito);
+    margin: 0;
 }
