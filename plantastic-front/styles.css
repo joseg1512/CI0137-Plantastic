@@ -291,3 +291,136 @@ a {
     color: var(--color-grafito);
     margin: 0;
 }
+
+/* SECCION PRODUCTOS DESTACADOS */
+.productos-destacados {
+    padding: 60px 10%;
+    background-color: var(--color-background);
+}
+
+.center {
+    text-align: center;
+}
+
+.section-title {
+    font-family: 'Georgia', serif;
+    font-size: 2.8rem;
+    color: #1A1A1A;
+    text-align: center;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 50px;
+}
+
+.products-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.product-card {
+    background-color: #fff;
+    border-radius: 12px;
+    flex: 1;
+    max-width: 270px;
+    box-shadow: 0 4px 15px #e3e3e3;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* Asegura que la imagen redondee con la tarjeta */
+}
+
+.product-image-container {
+    background-color: var(--color-circle);
+    /* Mismo verde clarito */
+    padding: 50px 20px;
+    text-align: center;
+    position: relative;
+}
+
+.product-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: var(--color-navbar-green);
+    /* Verde oscuro */
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 20px;
+}
+
+.product-icon {
+    font-size: 3.5rem;
+}
+
+.product-info {
+    padding: 25px 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-category {
+    font-size: 0.65rem;
+    color: var(--color-grafito);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.product-title {
+    font-family: 'Georgia', serif;
+    font-size: 1.3rem;
+    color: #1A1A1A;
+    margin: 0 0 10px 0;
+    font-weight: 400;
+}
+
+.product-desc {
+    font-size: 0.85rem;
+    color: var(--color-grafito);
+    line-height: 1.4;
+    margin-bottom: 25px;
+    flex: 1;
+    /* Empuja el precio al fondo siempre */
+}
+
+.product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-price {
+    font-family: 'Georgia', serif;
+    font-weight: 400;
+    color: var(--color-bosque);
+    font-size: 1.1rem;
+}
+
+.add-to-cart-btn {
+    background-color: var(--color-navbar-green);
+    color: #fff;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 1.2rem;
+    transition: background-color 0.2s ease;
+}
+
+.add-to-cart-btn:hover {
+    background-color: var(--color-bosque);
+}
+
+.view-all-container {
+    text-align: center;
+    margin-top: 60px;
+}
