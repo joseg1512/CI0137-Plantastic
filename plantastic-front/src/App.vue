@@ -1,26 +1,23 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <Navbar />
+  <HeroSection />
+  <OffersSection />
+  <FeaturedProducts />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Navbar from './components/Navbar.vue'
+import HeroSection from './components/HeroSection.vue'
+import OffersSection from './components/OffersSection.vue'
+import FeaturedProducts from './components/FeaturedProducts.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Navbar,
+    HeroSection,
+    OffersSection,
+    FeaturedProducts
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
