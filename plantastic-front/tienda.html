@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plantastic - Bienestar Natural</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <img src="src/assets/logo.png" alt="Logo Plantastic" style="height: 30px; width: auto;">
+            Plantastic
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="tienda.html" class="active">Tienda</a></li>
+            <li><a href="guia.html">Guía Medicinal</a></li>
+            <li><a href="#">Nosotros</a></li>
+        </ul>
+
+        <button class="cart-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span class="contador">0</span>
+        </button>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" style="min-height: 320px; padding: 40px 10%; justify-content: center; text-align: center; background: linear-gradient(180deg, #dfead7 0%, #e8f0e1 100%);">
+        <div class="hero-content" style="max-width: 760px; margin: 0 auto;">
+            <h1 class="hero-title" style="margin-bottom: 16px;">Nuestra tienda</h1>
+            <p class="hero-subtitle" style="max-width: 100%; margin: 0 auto;">
+                Descubre plantas y productos de belleza ecológica.
+            </p>
+        </div>
+    </section>
+
+    <section style="padding: 40px 10% 20px; display: flex; flex-direction: column; align-items: center; gap: 22px;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 14px;">
+            <button type="button" style="background: #163827; color: #EDE8DC; border: 1px solid #163827; border-radius: 999px; padding: 12px 22px; font-family: 'Figtree', sans-serif; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
+                🌿 Todos
+            </button>
+            <button type="button" style="background: #fff; color: #3A6644; border: 1px solid #C7DEC7; border-radius: 999px; padding: 12px 22px; font-family: 'Figtree', sans-serif; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
+                🌱 Plantas medicinales
+            </button>
+            <button type="button" style="background: #fff; color: #3A6644; border: 1px solid #C7DEC7; border-radius: 999px; padding: 12px 22px; font-family: 'Figtree', sans-serif; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
+                🧴 Belleza ecológica
+            </button>
+        </div>
+
+        <div style="width: min(100%, 580px); position: relative;">
+            <input type="text" placeholder="Buscar productos..." style="width: 100%; box-sizing: border-box; padding: 16px 52px 16px 18px; border: 1px solid #C7DEC7; border-radius: 12px; font-family: 'Figtree', sans-serif; font-size: 1rem; color: #1A1A1A; background: #fff; outline: none; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);">
+            <span style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 1.2rem; color: #747474; pointer-events: none;">🔍</span>
+        </div>
+    </section>
+
+    <section style="padding: 10px 10% 70px;">
+        <p style="text-align: center; color: #747474; margin: 0 0 30px; font-size: 1rem;">18 productos encontrados</p>
+
+        <div id="productsGrid" class="products-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; max-width: 1180px; margin: 0 auto;"></div>
+    </section>
+
+    <script src="templates.js"></script>
+    <script>
+        const products = [
+            {
+                category: 'PLANTA MEDICINAL',
+                title: 'Lavanda Orgánica',
+                description: 'Ideal para relajación y mejor sueño',
+                price: '₡5,800',
+                icon: '🌿',
+                badge: 'Bestseller',
+            },
+            {
+                category: 'PLANTA MEDICINAL',
+                title: 'Equinácea',
+                description: 'Fortalece el sistema inmunológico',
+                price: '₡6,200',
+                icon: '🌸',
+            },
+            {
+                category: 'PLANTA MEDICINAL',
+                title: 'Menta Piperita',
+                description: 'Alivia problemas digestivos',
+                price: '₡3,500',
+                icon: '🍃',
+            },
+            {
+                category: 'BELLEZA ECOLÓGICA',
+                title: 'Manzanilla',
+                description: 'Calma nervios y mejora digestión',
+                price: '₡4,200',
+                icon: '🌺',
+            },
+        ]
+
+        const productsGrid = document.getElementById('productsGrid')
+
+        products.forEach((product) => {
+            productsGrid.appendChild(Templates.createProductCardElement(product))
+        })
+    </script>
+
+</body>
