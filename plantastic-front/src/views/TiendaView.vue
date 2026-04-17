@@ -80,16 +80,16 @@ export default {
       products: [
         {
           category: 'PLANTA MEDICINAL',
-          title: 'Lavanda Organica',
-          description: 'Ideal para relajacion y mejor sueno',
+          title: 'Lavanda Orgánica',
+          description: 'Ideal para relajación y mejor sueño',
           price: '₡5,800',
           icon: '🌿',
           badge: 'Bestseller'
         },
         {
           category: 'PLANTA MEDICINAL',
-          title: 'Equinacea',
-          description: 'Fortalece el sistema inmunologico',
+          title: 'Equinácea',
+          description: 'Fortalece el sistema inmunológico',
           price: '₡6,200',
           icon: '🌸',
           badge: ''
@@ -105,7 +105,7 @@ export default {
         {
           category: 'BELLEZA ECOLOGICA',
           title: 'Serum Jojoba y Ricino',
-          description: 'Hidratacion profunda para rostro',
+          description: 'Hidratación profunda para rostro',
           price: '₡12,500',
           icon: '🧴',
           badge: ''
@@ -113,7 +113,7 @@ export default {
         {
           category: 'BELLEZA ECOLOGICA',
           title: 'Aceite Rosa Mosqueta',
-          description: 'Regeneracion celular y cicatrices',
+          description: 'Regeneración celular y cicatrices',
           price: '₡15,900',
           icon: '💧',
           badge: 'Nuevo'
