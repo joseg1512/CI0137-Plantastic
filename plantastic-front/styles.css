@@ -425,6 +425,82 @@ a {
     margin-top: 60px;
 }
 
+/* GUIA MEDICINAL */
+.medical-guide {
+  background-color: var(--color-bosque);
+  color: var(--color-crema);
+  padding: 100px 10%;
+  text-align: center;
+}
+
+.guide-tag {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-salvia);
+  display: block;
+  margin-bottom: 20px;
+}
+
+.guide-title {
+  font-family: 'Georgia', serif;
+  font-size: 2.8rem;
+  font-weight: 400;
+  margin: 0 0 15px 0;
+  color: var(--color-crema);
+}
+
+.guide-subtitle {
+  font-size: 1rem;
+  color: rgba(237, 232, 220, 0.8);
+  margin-bottom: 60px;
+  font-weight: 300;
+}
+
+.conditions-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  max-width: 900px;
+  margin: 0 auto 50px auto;
+}
+
+.condition-pill {
+  background-color: rgba(237, 232, 220, 0.1);
+  border: 1px solid rgba(237, 232, 220, 0.15);
+  color: var(--color-crema);
+  padding: 16px 20px;
+  border-radius: 6px;
+  font-family: var(--font-principal);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.condition-pill:hover {
+  background-color: rgba(237, 232, 220, 0.2);
+  transform: translateY(-2px);
+  border-color: rgba(237, 232, 220, 0.3);
+}
+
+.btn-white {
+  background-color: var(--color-crema);
+  color: var(--color-navbar-green);
+  font-weight: 600;
+  display: inline-block;
+  font-family: var(--font-principal);
+  padding: 14px 28px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-white:hover {
+  background-color: var(--color-salvia);
+}
+
 /* Footer */
 .site-footer {
   background: var(--color-bosque);
