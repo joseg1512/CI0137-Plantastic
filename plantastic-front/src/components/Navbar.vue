@@ -32,5 +32,35 @@ export default {
 </script>
 
 <style scoped>
-/* Los estilos se heredan de styles.css global */
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: auto;
+    padding: 15px 5%;
+  }
+
+  .nav-links {
+    order: 3;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 15px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-links {
+    flex-wrap: wrap;
+    gap: 10px 18px;
+  }
+
+  .nav-links a {
+    font-size: 0.85rem;
+  }
+}
 </style>

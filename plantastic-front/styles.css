@@ -1,428 +1,429 @@
 :root {
-    --color-navbar-green: #163827;
-    --color-salvia: #78A882;
-    --color-bosque: #163827;
-    --color-crema: #EDE8DC;
-    --color-grafito: #747474;
-    --color-background: #FFFBF2;
-    --color-circle: #D5EBCE;
-    --font-principal: 'Figtree', sans-serif;
+  --color-navbar-green: #163827;
+  --color-salvia: #78A882;
+  --color-bosque: #163827;
+  --color-crema: #EDE8DC;
+  --color-grafito: #747474;
+  --color-background: #FFFBF2;
+  --color-circle: #D5EBCE;
+  --font-principal: 'Figtree', sans-serif;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    font-family: var(--font-principal);
-    background-color: var(--color-background);
-    color: var(--color-grafito);
-    padding-top: 80px;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-principal);
+  background-color: var(--color-background);
+  color: var(--color-grafito);
+  padding-top: 80px;
+  overflow-x: hidden;
 }
 
 a {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
 .navbar {
-    z-index: 100;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 90px;
-    background-color: var(--color-navbar-green);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 10%;
-    box-sizing: border-box;
-    border-bottom: 1px solid rgba(116, 116, 116, 0.1);
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90px;
+  background-color: var(--color-navbar-green);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10%;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(116, 116, 116, 0.1);
 }
 
 .navbar .logo {
-    font-weight: 100;
-    font-size: 1.4rem;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  font-weight: 100;
+  font-size: 1.4rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .navbar .nav-links {
-    display: flex;
-    gap: 24px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  display: flex;
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .navbar .nav-links a {
-    color: var(--color-grafito);
-    font-weight: 300;
-    transition: color 0.2s ease;
+  color: var(--color-grafito);
+  font-weight: 300;
+  transition: color 0.2s ease;
 }
 
 .navbar .nav-links a:hover {
-    color: #fff;
+  color: #fff;
 }
 
 .navbar .nav-links a.active {
-    color: #fff;
-    font-weight: 400;
+  color: #fff;
+  font-weight: 400;
 }
 
 .navbar .cart-btn {
-    background-color: var(--color-bosque);
-    color: var(--color-crema);
-    border: none;
-    padding: 8px 7px;
-    border-radius: 3px;
-    font-family: var(--font-principal);
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: background-color 0.2s ease;
+  background-color: var(--color-bosque);
+  color: var(--color-crema);
+  border: none;
+  padding: 8px 7px;
+  border-radius: 3px;
+  font-family: var(--font-principal);
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s ease;
 }
 
 .navbar .cart-btn:hover {
-    background-color: var(--color-salvia);
+  background-color: var(--color-salvia);
 }
 
 .navbar .cart-btn .contador {
-    color: var(--color-crema);
-    border-radius: 50%;
-    padding: 2px 6px;
-    font-size: 0.85rem;
+  color: var(--color-crema);
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.85rem;
 }
 
 /* HERO */
 .hero {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 30px 10%;
-    min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 10%;
+  min-height: calc(100vh - 80px);
 }
 
 .hero-content {
-    flex: 1;
-    max-width: 50%;
+  flex: 1;
+  max-width: 50%;
 }
 
 .hero-tag {
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 0.75rem;
-    color: var(--color-bosque);
-    font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.75rem;
+  color: var(--color-bosque);
+  font-weight: 700;
 }
 
 .hero-title {
-    font-family: 'Georgia', serif;
-    font-size: 4.2rem;
-    font-weight: 400;
-    color: #1A1A1A;
-    margin: 15px 0 25px 0;
-    line-height: 1.1;
+  font-family: 'Georgia', serif;
+  font-size: 4.2rem;
+  font-weight: 400;
+  color: #1A1A1A;
+  margin: 15px 0 25px 0;
+  line-height: 1.1;
 }
 
 .hero-title .highlight {
-    font-style: italic;
-    color: var(--color-bosque);
+  font-style: italic;
+  color: var(--color-bosque);
 }
 
 .hero-subtitle {
-    font-size: 1.1rem;
-    color: var(--color-grafito);
-    line-height: 1.6;
-    margin-bottom: 35px;
-    max-width: 90%;
+  font-size: 1.1rem;
+  color: var(--color-grafito);
+  line-height: 1.6;
+  margin-bottom: 35px;
+  max-width: 90%;
 }
 
 .hero-buttons {
-    display: flex;
-    gap: 15px;
+  display: flex;
+  gap: 15px;
 }
 
 .btn {
-    padding: 12px 24px;
-    border-radius: 4px;
-    font-family: var(--font-principal);
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    border: none;
-    text-align: center;
-    text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-family: var(--font-principal);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  text-align: center;
+  text-decoration: none;
 }
 
 .btn-primary {
-    background-color: var(--color-navbar-green);
-    color: #fff;
+  background-color: var(--color-navbar-green);
+  color: #fff;
 }
 
 .btn-primary:hover {
-    background-color: var(--color-bosque);
+  background-color: var(--color-bosque);
 }
 
 .btn-outline {
-    background-color: transparent;
-    border: 1px solid var(--color-navbar-green);
-    color: var(--color-navbar-green);
+  background-color: transparent;
+  border: 1px solid var(--color-navbar-green);
+  color: var(--color-navbar-green);
 }
 
 .btn-outline:hover {
-    background-color: rgba(22, 56, 39, 0.05);
-    /* very light based on user's navbar hex */
+  background-color: rgba(22, 56, 39, 0.05);
+  /* very light based on user's navbar hex */
 }
 
 .hero-visual {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 .circle-bg {
-    width: 480px;
-    height: 480px;
-    background-color: var(--color-circle);
-    /* Tono verde muy sutil similar a la imagen */
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 480px;
+  height: 480px;
+  background-color: var(--color-circle);
+  /* Tono verde muy sutil similar a la imagen */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .leaf-icon {
-    font-size: 8rem;
-    transform: rotate(10deg);
+  font-size: 8rem;
+  transform: rotate(10deg);
 }
 
 .badge {
-    position: absolute;
-    background-color: #fff;
-    padding: 12px 20px;
-    border-radius: 8px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
-    font-family: var(--font-principal);
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: #1A1A1A;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  position: absolute;
+  background-color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+  font-family: var(--font-principal);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #1A1A1A;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .badge-1 {
-    top: 60px;
-    left: 100px;
+  top: 60px;
+  left: 100px;
 }
 
 .badge-2 {
-    bottom: 80px;
-    right: 60px;
+  bottom: 80px;
+  right: 60px;
 }
 
 .ofrecemos {
-    padding: 60px 10%;
-    text-align: center;
+  padding: 60px 10%;
+  text-align: center;
 }
 
 .section-tag {
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-size: 0.85rem;
-    color: var(--color-bosque);
-    font-weight: 700;
-    margin-bottom: 50px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 0.85rem;
+  color: var(--color-bosque);
+  font-weight: 700;
+  margin-bottom: 50px;
 }
 
 .cards-container {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
 }
 
 .card {
-    background-color: #fff;
-    border-radius: 16px;
-    padding: 40px;
-    flex: 1;
-    max-width: 550px;
-    text-align: left;
-    box-shadow: 0 4px 15px #e3e3e3;
-    border: 1px solid #ffffff;
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 40px;
+  flex: 1;
+  max-width: 550px;
+  text-align: left;
+  box-shadow: 0 4px 15px #e3e3e3;
+  border: 1px solid #ffffff;
 }
 
 .card:hover {
-    /* acentar sombra */
-    box-shadow: 0 12px 45px #e3e3e3;
-    transition: box-shadow 0.4s;
+  /* acentar sombra */
+  box-shadow: 0 12px 45px #e3e3e3;
+  transition: box-shadow 0.4s;
 
-    .card-title {
-        color: var(--color-bosque);
-    }
+  .card-title {
+    color: var(--color-bosque);
+  }
 }
 
 .card-icon {
-    font-size: 3rem;
-    display: inline-block;
-    margin-bottom: 20px;
+  font-size: 3rem;
+  display: inline-block;
+  margin-bottom: 20px;
 }
 
 .card-title {
-    display: block;
-    font-family: 'Georgia', serif;
-    font-size: 1.8rem;
-    color: #1A1A1A;
-    margin-bottom: 15px;
-    text-decoration: none;
-    transition: color 0.2s ease;
+  display: block;
+  font-family: 'Georgia', serif;
+  font-size: 1.8rem;
+  color: #1A1A1A;
+  margin-bottom: 15px;
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .card-text {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: var(--color-grafito);
-    margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-grafito);
+  margin: 0;
 }
 
 /* SECCION PRODUCTOS DESTACADOS */
 .productos-destacados {
-    padding: 60px 10%;
-    background-color: var(--color-background);
+  padding: 60px 10%;
+  background-color: var(--color-background);
 }
 
 .center {
-    text-align: center;
+  text-align: center;
 }
 
 .section-title {
-    font-family: 'Georgia', serif;
-    font-size: 2.8rem;
-    color: #1A1A1A;
-    text-align: center;
-    font-weight: 400;
-    margin-top: 0;
-    margin-bottom: 50px;
+  font-family: 'Georgia', serif;
+  font-size: 2.8rem;
+  color: #1A1A1A;
+  text-align: center;
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 50px;
 }
 
 .products-container {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
 }
 
 .product-card {
-    background-color: #fff;
-    border-radius: 12px;
-    flex: 1;
-    max-width: 270px;
-    box-shadow: 0 4px 15px #e3e3e3;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    /* Asegura que la imagen redondee con la tarjeta */
+  background-color: #fff;
+  border-radius: 12px;
+  flex: 1;
+  max-width: 270px;
+  box-shadow: 0 4px 15px #e3e3e3;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* Asegura que la imagen redondee con la tarjeta */
 }
 
 .product-image-container {
-    background-color: var(--color-circle);
-    /* Mismo verde clarito */
-    padding: 50px 20px;
-    text-align: center;
-    position: relative;
+  background-color: var(--color-circle);
+  /* Mismo verde clarito */
+  padding: 50px 20px;
+  text-align: center;
+  position: relative;
 }
 
 .product-badge {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background-color: var(--color-navbar-green);
-    /* Verde oscuro */
-    color: #fff;
-    font-size: 0.65rem;
-    font-weight: 700;
-    padding: 6px 12px;
-    border-radius: 20px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: var(--color-navbar-green);
+  /* Verde oscuro */
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 20px;
 }
 
 .product-icon {
-    font-size: 3.5rem;
+  font-size: 3.5rem;
 }
 
 .product-info {
-    padding: 25px 20px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+  padding: 25px 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .product-category {
-    font-size: 0.65rem;
-    color: var(--color-grafito);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 700;
-    margin-bottom: 8px;
+  font-size: 0.65rem;
+  color: var(--color-grafito);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  margin-bottom: 8px;
 }
 
 .product-title {
-    font-family: 'Georgia', serif;
-    font-size: 1.3rem;
-    color: #1A1A1A;
-    margin: 0 0 10px 0;
-    font-weight: 400;
+  font-family: 'Georgia', serif;
+  font-size: 1.3rem;
+  color: #1A1A1A;
+  margin: 0 0 10px 0;
+  font-weight: 400;
 }
 
 .product-desc {
-    font-size: 0.85rem;
-    color: var(--color-grafito);
-    line-height: 1.4;
-    margin-bottom: 25px;
-    flex: 1;
-    /* Empuja el precio al fondo siempre */
+  font-size: 0.85rem;
+  color: var(--color-grafito);
+  line-height: 1.4;
+  margin-bottom: 25px;
+  flex: 1;
+  /* Empuja el precio al fondo siempre */
 }
 
 .product-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .product-price {
-    font-family: 'Georgia', serif;
-    font-weight: 400;
-    color: var(--color-bosque);
-    font-size: 1.1rem;
+  font-family: 'Georgia', serif;
+  font-weight: 400;
+  color: var(--color-bosque);
+  font-size: 1.1rem;
 }
 
 .add-to-cart-btn {
-    background-color: var(--color-navbar-green);
-    color: #fff;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    font-weight: 400;
-    font-size: 1.2rem;
-    transition: background-color 0.2s ease;
+  background-color: var(--color-navbar-green);
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 1.2rem;
+  transition: background-color 0.2s ease;
 }
 
 .add-to-cart-btn:hover {
-    background-color: var(--color-bosque);
+  background-color: var(--color-bosque);
 }
 
 .view-all-container {
-    text-align: center;
-    margin-top: 60px;
+  text-align: center;
+  margin-top: 60px;
 }
 
 /* GUIA MEDICINAL */
@@ -714,4 +715,146 @@ a {
 
 .products-grid :deep(.product-card) {
   max-width: 100%;
+}
+
+/* Responsive - Homepage */
+
+@media (max-width: 768px) {
+
+  /* Hero: de horizontal a vertical */
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 5%;
+    min-height: auto;
+    gap: 40px;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-title {
+    font-size: 2.6rem;
+  }
+
+  .hero-subtitle {
+    max-width: 100%;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-visual {
+    width: 100%;
+  }
+
+  .circle-bg {
+    width: 260px;
+    height: 260px;
+  }
+
+  .leaf-icon {
+    font-size: 5rem;
+  }
+
+  .badge {
+    font-size: 0.75rem;
+    padding: 8px 14px;
+  }
+
+  .badge-1 {
+    top: 10px;
+    left: 0;
+  }
+
+  .badge-2 {
+    bottom: 10px;
+    right: 0;
+  }
+
+  /* Ofrecemos: tarjetas apiladas */
+  .ofrecemos {
+    padding: 40px 5%;
+  }
+
+  .cards-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    max-width: 100%;
+    padding: 30px;
+  }
+
+  /* Productos destacados */
+  .productos-destacados {
+    padding: 40px 5%;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .products-container {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .product-card {
+    max-width: 45%;
+    flex: 0 0 45%;
+  }
+
+  /* Guía medicinal */
+  .medical-guide {
+    padding: 60px 5%;
+  }
+
+  .guide-title {
+    font-size: 2rem;
+  }
+
+  .conditions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .circle-bg {
+    width: 200px;
+    height: 200px;
+  }
+
+  .leaf-icon {
+    font-size: 3.5rem;
+  }
+
+  .badge {
+    display: none;
+  }
+
+  .product-card {
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+
+  .conditions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-tag {
+    font-size: 0.75rem;
+  }
 }
