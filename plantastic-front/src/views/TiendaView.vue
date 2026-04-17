@@ -147,9 +147,10 @@ export default {
   min-height: 320px;
   padding: 40px 10%;
   display: flex;
+  align-items: center;
   justify-content: center;
   text-align: center;
-  background: linear-gradient(180deg, #dfead7 0%, #e8f0e1 100%);
+  background: var(--color-circle);
 }
 
 .tienda-hero-content {
@@ -183,8 +184,8 @@ export default {
 
 .filter-btn {
   background: #fff;
-  color: #3a6644;
-  border: 1px solid #c7dec7;
+  color: var(--color-bosque);
+  border: 2px solid rgba(116, 116, 116, 0.25);
   border-radius: 999px;
   padding: 12px 22px;
   font-family: var(--font-principal);
@@ -196,9 +197,9 @@ export default {
 }
 
 .filter-btn-active {
-  background: #163827;
+  background: var(--color-bosque);
   color: #ede8dc;
-  border-color: #163827;
+  border-color: var(--color-bosque);
 }
 
 .search-wrapper {
@@ -210,14 +211,14 @@ export default {
   width: 100%;
   box-sizing: border-box;
   padding: 16px 52px 16px 18px;
-  border: 1px solid #c7dec7;
+  border: 2px solid rgba(116, 116, 116, 0.25);
   border-radius: 12px;
   font-family: var(--font-principal);
   font-size: 1rem;
-  color: #1a1a1a;
+  color: var(--color-grafito);
   background: #fff;
   outline: none;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 10px rgba(116, 116, 116, 0.08);
 }
 
 .search-icon {
