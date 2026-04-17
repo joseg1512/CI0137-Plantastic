@@ -3,7 +3,7 @@
     <div class="hero-content tienda-hero-content">
       <h1 class="hero-title tienda-title">Nuestra tienda</h1>
       <p class="hero-subtitle tienda-subtitle">
-        Descubre plantas y productos de belleza ecologica.
+        Descubre plantas y productos de belleza ecológica.
       </p>
     </div>
   </section>
@@ -29,10 +29,10 @@
       <button
         type="button"
         class="filter-btn"
-        :class="{ 'filter-btn-active': activeCategory === 'BELLEZA ECOLOGICA' }"
-        @click="activeCategory = 'BELLEZA ECOLOGICA'"
+        :class="{ 'filter-btn-active': activeCategory === 'BELLEZA ECOLÓGICA' }"
+        @click="activeCategory = 'BELLEZA ECOLÓGICA'"
       >
-        🧴 Belleza ecologica
+        🧴 Belleza ecológica
       </button>
     </div>
 
@@ -103,15 +103,15 @@ export default {
           badge: ''
         },
         {
-          category: 'BELLEZA ECOLOGICA',
-          title: 'Serum Jojoba y Ricino',
+          category: 'BELLEZA ECOLÓGICA',
+          title: 'Sérum Jojoba y Ricino',
           description: 'Hidratación profunda para rostro',
           price: '₡12,500',
           icon: '🧴',
           badge: ''
         },
         {
-          category: 'BELLEZA ECOLOGICA',
+          category: 'BELLEZA ECOLÓGICA',
           title: 'Aceite Rosa Mosqueta',
           description: 'Regeneración celular y cicatrices',
           price: '₡15,900',

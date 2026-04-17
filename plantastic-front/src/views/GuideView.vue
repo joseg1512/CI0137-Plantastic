@@ -2,7 +2,7 @@
   <main class="guide-page">
     <section class="guide-hero">
       <span class="guide-kicker">GUIA MEDICINAL</span>
-      <h1 class="guide-heading">Plantas organizadas por condición de salud</h1>
+      <h1 class="guide-heading">Plantas organizadas por padecimiento</h1>
       <p class="guide-lead">Encuentra el remedio natural perfecto para tu necesidad específica</p>
     </section>
 
