@@ -1,8 +1,8 @@
 <template>
   <section class="medical-guide">
     <div class="guide-header">
-      <span class="guide-tag">GUÍA MEDICINAL</span>
-      <h2 class="guide-title">¿Qué puedes tratar?</h2>
+      <span class="tag tag--md tag--salvia guide-tag">GUÍA MEDICINAL</span>
+      <h2 class="font-serif guide-title">¿Qué puedes tratar?</h2>
       <p class="guide-subtitle">Explora plantas medicinales organizadas por condición de salud</p>
     </div>
 

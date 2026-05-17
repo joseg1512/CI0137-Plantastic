@@ -1,7 +1,7 @@
 <template>
   <section class="tienda-hero">
     <div class="hero-content tienda-hero-content">
-      <h1 class="hero-title tienda-title">Nuestra tienda</h1>
+      <h1 class="font-serif hero-title tienda-title">Nuestra tienda</h1>
       <p class="hero-subtitle tienda-subtitle">
         Descubre plantas y productos de belleza ecológica.
       </p>

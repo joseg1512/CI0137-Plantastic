@@ -4,7 +4,7 @@
       <div class="footer-brand">
         <div class="footer-logo-row">
           <span class="footer-leaf">🌿</span>
-          <span class="footer-brand-name">Plantastic</span>
+          <span class="font-serif footer-brand-name">Plantastic</span>
         </div>
         <p>
           Naturaleza que sana. Productos botánicos de Costa Rica respaldados por la ciencia y el

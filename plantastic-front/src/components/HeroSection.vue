@@ -1,8 +1,8 @@
 <template>
   <section class="hero">
     <div class="hero-content">
-      <span class="hero-tag">NATURALEZA QUE SANA</span>
-      <h1 class="hero-title">La naturaleza tiene una <span class="highlight">cura</span> para todo</h1>
+      <span class="tag tag--md tag--bosque">NATURALEZA QUE SANA</span>
+      <h1 class="font-serif hero-title">La naturaleza tiene una <span class="highlight">cura</span> para todo</h1>
       <p class="hero-subtitle">Descubre el poder de las plantas medicinales de Costa Rica. Respaldo científico,
         100% orgánico, cultivado con amor.</p>
       <div class="hero-buttons">

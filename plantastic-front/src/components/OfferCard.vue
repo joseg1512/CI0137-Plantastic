@@ -1,7 +1,7 @@
 <template>
-  <div class="card">
+  <div class="card-base card">
     <span class="card-icon">{{ icon }}</span>
-    <a href="#" class="card-title">{{ title }}</a>
+    <a href="#" class="font-serif card-title">{{ title }}</a>
     <p class="card-text">{{ description }}</p>
   </div>
 </template>

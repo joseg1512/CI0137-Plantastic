@@ -1,31 +1,31 @@
 <template>
   <main class="guide-page">
-    <section class="guide-hero">
-      <span class="guide-kicker">GUIA MEDICINAL</span>
-      <h1 class="guide-heading">Plantas organizadas por padecimiento</h1>
+    <section class="guide-hero font-serif">
+      <span class="tag tag--sm tag--wide tag--bosque">GUIA MEDICINAL</span>
+      <h1 class="font-serif guide-heading">Plantas organizadas por padecimiento</h1>
       <p class="guide-lead">Encuentra el remedio natural perfecto para tu necesidad específica</p>
     </section>
 
-    <section class="guide-stats" aria-label="Estádísticas de la guía">
+    <section class="guide-stats font-serif" aria-label="Estádísticas de la guía">
       <article class="stat-item">
-        <p class="stat-value">30+</p>
+        <p class="stat-value font-serif">30+</p>
         <p class="stat-label">Especies</p>
       </article>
       <article class="stat-item">
-        <p class="stat-value">8</p>
+        <p class="stat-value font-serif">8</p>
         <p class="stat-label">Categorías</p>
       </article>
       <article class="stat-item">
-        <p class="stat-value">100%</p>
+        <p class="stat-value font-serif">100%</p>
         <p class="stat-label">Respaldo científico</p>
       </article>
       <article class="stat-item">
-        <p class="stat-value">CR</p>
+        <p class="stat-value font-serif">CR</p>
         <p class="stat-label">Cultivadas</p>
       </article>
     </section>
 
-    <section class="guide-alert" aria-label="Aviso médico">
+    <section class="guide-alert font-serif" aria-label="Aviso médico">
       <span class="alert-icon">⚕️</span>
       <p>
         <strong>Aviso médico:</strong> Está información es de carácter educativo y no sustituye el consejo médico
@@ -35,24 +35,24 @@
     </section>
 
     <section class="guide-conditions" aria-label="Condiciones de salud">
-      <div class="condition-column">
+      <div class="condition-column font-serif">
         <article
           v-for="condition in leftColumnConditions"
           :key="condition.title"
-          class="condition-card"
+          class="card-base condition-card"
           :class="{ 'condition-card-open': isExpanded(condition.title) }"
         >
           <button
             type="button"
-            class="condition-header"
+            class="condition-header font-serif"
             :aria-expanded="isExpanded(condition.title)"
             :aria-label="`${isExpanded(condition.title) ? 'Cerrar' : 'Expandir'} ${condition.title}`"
             @click="toggleCondition(condition.title)"
           >
             <div class="condition-left">
-              <span class="condition-icon">{{ condition.icon }}</span>
+              <span class="icon-circle icon-circle--md">{{ condition.icon }}</span>
               <div class="condition-copy">
-                <h2>{{ condition.title }}</h2>
+                <h2 class="font-serif">{{ condition.title }}</h2>
                 <p>{{ condition.count }} plantas recomendadas</p>
               </div>
             </div>
@@ -61,9 +61,9 @@
 
           <div v-if="isExpanded(condition.title)" class="condition-details">
             <article v-for="plant in condition.plants" :key="plant.name" class="plant-item">
-              <span class="plant-icon">{{ plant.icon }}</span>
+              <span class="icon-circle icon-circle--sm">{{ plant.icon }}</span>
               <div class="plant-copy">
-                <h3>{{ plant.name }}</h3>
+                <h3 class="font-serif">{{ plant.name }}</h3>
                 <p>{{ plant.description }}</p>
               </div>
             </article>
@@ -71,24 +71,24 @@
         </article>
       </div>
 
-      <div class="condition-column">
+      <div class="condition-column font-serif">
         <article
           v-for="condition in rightColumnConditions"
           :key="condition.title"
-          class="condition-card"
+          class="card-base condition-card"
           :class="{ 'condition-card-open': isExpanded(condition.title) }"
         >
           <button
             type="button"
-            class="condition-header"
+            class="condition-header font-serif"
             :aria-expanded="isExpanded(condition.title)"
             :aria-label="`${isExpanded(condition.title) ? 'Cerrar' : 'Expandir'} ${condition.title}`"
             @click="toggleCondition(condition.title)"
           >
             <div class="condition-left">
-              <span class="condition-icon">{{ condition.icon }}</span>
+              <span class="icon-circle icon-circle--md">{{ condition.icon }}</span>
               <div class="condition-copy">
-                <h2>{{ condition.title }}</h2>
+                <h2 class="font-serif">{{ condition.title }}</h2>
                 <p>{{ condition.count }} plantas recomendadas</p>
               </div>
             </div>
@@ -97,9 +97,9 @@
 
           <div v-if="isExpanded(condition.title)" class="condition-details">
             <article v-for="plant in condition.plants" :key="plant.name" class="plant-item">
-              <span class="plant-icon">{{ plant.icon }}</span>
+              <span class="icon-circle icon-circle--sm">{{ plant.icon }}</span>
               <div class="plant-copy">
-                <h3>{{ plant.name }}</h3>
+                <h3 class="font-serif">{{ plant.name }}</h3>
                 <p>{{ plant.description }}</p>
               </div>
             </article>
@@ -108,8 +108,8 @@
       </div>
     </section>
 
-    <section class="guide-cta">
-      <h2>¿Listo para comenzar tu sanación natural?</h2>
+    <section class="guide-cta font-serif">
+      <h2 class="font-serif">¿Listo para comenzar tu sanación natural?</h2>
       <p>Explora nuestra tienda y encuentra los productos perfectos para ti</p>
       <RouterLink to="/tienda" class="guide-cta-button">Ir a la tienda →</RouterLink>
     </section>

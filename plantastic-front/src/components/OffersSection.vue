@@ -1,6 +1,6 @@
 <template>
   <section class="ofrecemos">
-    <h2 class="section-tag">LO QUE OFRECEMOS</h2>
+    <h2 class="tag tag--lg tag--wide tag--bosque section-tag">LO QUE OFRECEMOS</h2>
 
     <div class="cards-container">
       <OfferCard

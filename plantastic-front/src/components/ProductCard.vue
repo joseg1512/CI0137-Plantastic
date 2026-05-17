@@ -1,15 +1,15 @@
 <template>
-  <div class="product-card">
+  <div class="card-base product-card">
     <div class="product-image-container">
       <span v-if="badge" class="product-badge">{{ badge }}</span>
       <span class="product-icon">{{ icon }}</span>
     </div>
     <div class="product-info">
       <span class="product-category">{{ category }}</span>
-      <h4 class="product-title">{{ title }}</h4>
+      <h4 class="font-serif product-title">{{ title }}</h4>
       <p class="product-desc">{{ description }}</p>
       <div class="product-footer">
-        <span class="product-price">{{ price }}</span>
+        <span class="font-serif product-price">{{ price }}</span>
         <button class="add-to-cart-btn" @click.prevent="$emit('add-to-cart')">+</button>
       </div>
     </div>
