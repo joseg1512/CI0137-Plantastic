@@ -22,12 +22,17 @@
       </svg>
       <span class="contador">0</span>
     </button>
+    <UserIcon />
   </nav>
 </template>
 
 <script>
+import UserIcon from '@/components/UserIcon.vue'
 export default {
-  name: 'NavbarComponent'
+  name: 'NavbarComponent',
+  components: {
+    UserIcon
+  }
 }
 </script>
 
