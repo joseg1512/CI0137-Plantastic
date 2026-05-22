@@ -142,6 +142,7 @@ export default {
     },
     handleCartClick() {
       if (!this.authStore.isLoggedIn) {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
         this.$router.push('/login')
         return
       }

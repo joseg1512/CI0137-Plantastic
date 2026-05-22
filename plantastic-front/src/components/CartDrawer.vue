@@ -72,6 +72,7 @@
 <script>
 import { watch } from 'vue'
 import { useCartStore } from '@/stores/useCartStore'
+import { useAuthStore } from '@/stores/useAuthStore'
 import CheckoutModal from './CheckoutModal.vue'
 
 export default {
@@ -79,12 +80,16 @@ export default {
   components: { CheckoutModal },
   setup() {
     const cartStore = useCartStore()
+    const authStore = useAuthStore()
 
     watch(() => cartStore.isOpen, (open) => {
+      if (open && !authStore.isLoggedIn) {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      }
       document.body.style.overflow = open ? 'hidden' : ''
     })
 
-    return { cartStore }
+    return { cartStore, authStore }
   },
   data() {
     return { showCheckout: false }
