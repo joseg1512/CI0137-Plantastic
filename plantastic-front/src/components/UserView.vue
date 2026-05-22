@@ -204,17 +204,20 @@
 </template>
 
 <script>
+import { useAuthStore } from '@/stores/useAuthStore'
+import { useCartStore } from '@/stores/useCartStore'
+
 export default {
   name: 'UserView',
+  setup() {
+    const authStore = useAuthStore()
+    const cartStore = useCartStore()
+    return { authStore, cartStore }
+  },
   data() {
     return {
       activeTab: 'login',
-      isLoggedIn: false,
-      currentUser: {},
       profileTab: 'carrito',
-
-      // Cuando se integre con compras se meten los productos
-      carritoItems: [],
       historialItems: [],
 
       loginForm: { email: '', password: '' },
@@ -234,22 +237,15 @@ export default {
     }
   },
   computed: {
-    carritoCount()  { return this.carritoItems.length },
-    historialCount(){ return this.historialItems.length },
+    isLoggedIn() { return this.authStore.isLoggedIn },
+    currentUser() { return this.authStore.user || {} },
+    carritoCount() { return this.cartStore.itemCount },
+    historialCount() { return this.historialItems.length },
   },
   mounted() {
-    this.checkLoginStatus()
     if (this.$route?.query?.tab === 'register') this.activeTab = 'register'
   },
   methods: {
-    checkLoginStatus() {
-      const stored = localStorage.getItem('plantastic_user')
-      if (stored) {
-        this.isLoggedIn = true
-        this.currentUser = JSON.parse(stored)
-      }
-    },
-
     switchTab(tab) {
       this.activeTab = tab
       this.loginError = this.loginSuccess = this.registerError = this.registerSuccess = ''
@@ -276,9 +272,9 @@ export default {
       const f = this.registerForm
       const rules = {
         name:      () => !f.name.trim() ? 'El nombre es obligatorio.' : null,
-        lastname:    () => !f.lastname.trim() ? 'El apellido es obligatorio.' : null,
-        email:      () => !f.email ? 'El correo es obligatorio.' : !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email) ? 'Ingresa un correo válido.' : null,
-        phone:    () => f.phone && !/^\d{8}$/.test(f.phone) ? 'El teléfono debe tener 8 dígitos.' : null,
+        lastname:  () => !f.lastname.trim() ? 'El apellido es obligatorio.' : null,
+        email:     () => !f.email ? 'El correo es obligatorio.' : !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email) ? 'Ingresa un correo válido.' : null,
+        phone:     () => f.phone && !/^\d{8}$/.test(f.phone) ? 'El teléfono debe tener 8 dígitos.' : null,
         password:  () => !f.password ? 'La contraseña es obligatoria.' : f.password.length < 6 ? 'Mínimo 6 caracteres.' : null,
         password2: () => !f.password2 ? 'Confirma la contraseña.' : f.password2 !== f.password ? 'Las contraseñas no coinciden.' : null,
       }
@@ -297,24 +293,11 @@ export default {
       this.loginSuccess = ''
 
       try {
-        const response = await fetch('/api/users/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: this.loginForm.email, password: this.loginForm.password })
-        })
-        const data = await response.json()
-
-        if (!response.ok) {
-          this.loginError = data.message || 'Correo electrónico o contraseña incorrectos.'
-        } else {
-          const usuario = data.usuario || data
-          localStorage.setItem('plantastic_user', JSON.stringify(usuario))
-          window.dispatchEvent(new Event('plantastic-auth-change'))
-          this.loginSuccess = `¡Bienvenido, ${usuario.name}!`
-          setTimeout(() => { this.currentUser = usuario; this.isLoggedIn = true }, 700)
-        }
-      } catch {
-        this.loginError = 'No se pudo conectar con el servidor. Verifica que el backend esté corriendo.'
+        await this.authStore.login(this.loginForm.email, this.loginForm.password)
+        await this.cartStore.fetchCart()
+        this.loginSuccess = `¡Bienvenido, ${this.authStore.user.name}!`
+      } catch (err) {
+        this.loginError = err.message || 'Correo electrónico o contraseña incorrectos.'
       } finally {
         this.loginLoading = false
       }
@@ -322,7 +305,6 @@ export default {
 
     async handleRegister() {
       ['name', 'lastname', 'email', 'phone', 'password', 'password2'].forEach(f => this.validateRegisterField(f))
-      console.log('Errores de validación:', this.registerFieldErrors)
       if (Object.keys(this.registerFieldErrors).length) return
 
       this.registerLoading = true
@@ -357,11 +339,8 @@ export default {
       }
     },
 
-    logout() {
-      localStorage.removeItem('plantastic_user')
-      window.dispatchEvent(new Event('plantastic-auth-change'))
-      this.isLoggedIn = false
-      this.currentUser = {}
+    async logout() {
+      await this.authStore.logout()
       this.profileTab = 'carrito'
       this.switchTab('login')
     }

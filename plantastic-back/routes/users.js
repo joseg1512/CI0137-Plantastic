@@ -1,6 +1,6 @@
 const express = require('express')
 const bcrypt = require('bcrypt')
-const { addUser, searchByEmail } = require('../utils/csvUsers')
+const { addUser, searchByEmail, updateUser } = require('../utils/csvUsers')
 
 const router = express.Router()
 const SALT_ROUNDS = 10
@@ -70,6 +70,9 @@ router.post('/login', async (req, res) => {
 
     const { password: _hash, ...usuarioSeguro } = usuario
 
+    req.session.user = usuarioSeguro
+    req.session.cart = req.session.cart || []
+
     return res.status(200).json({
       message: '¡Sesión iniciada correctamente!',
       usuario: usuarioSeguro
@@ -78,6 +81,74 @@ router.post('/login', async (req, res) => {
   } catch (err) {
     console.error('Error en /login:', err)
     return res.status(500).json({ message: 'Error interno del servidor. Intenta de nuevo más tarde.' })
+  }
+})
+
+router.post('/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.json({ message: 'Sesión cerrada' })
+  })
+})
+
+router.get('/me', (req, res) => {
+  if (!req.session.user) {
+    return res.status(401).json({ message: 'No hay sesión activa' })
+  }
+  return res.json(req.session.user)
+})
+
+router.put('/profile', async (req, res) => {
+  if (!req.session.user) return res.status(401).json({ message: 'No autenticado' })
+
+  try {
+    const { name, lastname, phone } = req.body
+
+    if (!name || !name.trim() || !lastname || !lastname.trim()) {
+      return res.status(400).json({ message: 'Nombre y apellido son obligatorios.' })
+    }
+    if (phone && !/^\d{8}$/.test(phone)) {
+      return res.status(400).json({ message: 'El teléfono debe tener exactamente 8 dígitos.' })
+    }
+
+    const updated = await updateUser(req.session.user.email, {
+      name: name.trim(),
+      lastname: lastname.trim(),
+      phone: phone ? phone.trim() : ''
+    })
+    if (!updated) return res.status(404).json({ message: 'Usuario no encontrado.' })
+
+    const { password: _hash, ...usuarioSeguro } = updated
+    req.session.user = usuarioSeguro
+    return res.json({ message: 'Perfil actualizado.', usuario: usuarioSeguro })
+  } catch (err) {
+    console.error('Error en PUT /profile:', err)
+    return res.status(500).json({ message: 'Error interno del servidor.' })
+  }
+})
+
+router.put('/address', async (req, res) => {
+  if (!req.session.user) return res.status(401).json({ message: 'No autenticado' })
+
+  try {
+    const { provincia, direccion, codigoPostal } = req.body
+
+    if (codigoPostal && !/^\d{5}$/.test(codigoPostal)) {
+      return res.status(400).json({ message: 'El código postal debe tener 5 dígitos.' })
+    }
+
+    const updated = await updateUser(req.session.user.email, {
+      provincia: provincia || '',
+      direccion: direccion || '',
+      codigoPostal: codigoPostal || ''
+    })
+    if (!updated) return res.status(404).json({ message: 'Usuario no encontrado.' })
+
+    const { password: _hash, ...usuarioSeguro } = updated
+    req.session.user = usuarioSeguro
+    return res.json({ message: 'Dirección guardada.', usuario: usuarioSeguro })
+  } catch (err) {
+    console.error('Error en PUT /address:', err)
+    return res.status(500).json({ message: 'Error interno del servidor.' })
   }
 })
 

@@ -1,0 +1,20 @@
+export const productos = [
+  { id: 'lavanda', name: 'Lavanda Orgánica', price: 5800, category: 'plantas', image: 'lavanda', description: 'Relajante natural, ideal para el estrés y el sueño.' },
+  { id: 'manzanilla', name: 'Manzanilla Alemana', price: 4500, category: 'plantas', image: 'manzanilla', description: 'Antiinflamatoria y digestiva.' },
+  { id: 'eucalipto', name: 'Eucalipto', price: 4200, category: 'plantas', image: 'eucalipto', description: 'Expectorante natural para vías respiratorias.' },
+  { id: 'aloe', name: 'Aloe Vera Gel', price: 7900, category: 'plantas', image: 'aloe', description: 'Hidratante y regenerador de piel.' },
+  { id: 'jengibre', name: 'Jengibre', price: 3800, category: 'plantas', image: 'jengibre', description: 'Antiinflamatorio y digestivo.' },
+  { id: 'valeriana', name: 'Valeriana', price: 6500, category: 'plantas', image: 'valeriana', description: 'Sedante natural para el insomnio.' },
+  { id: 'curcuma', name: 'Cúrcuma', price: 5200, category: 'plantas', image: 'curcuma', description: 'Potente antiinflamatorio y antioxidante.' },
+  { id: 'equinacea', name: 'Equinácea', price: 6200, category: 'plantas', image: 'equinacea', description: 'Estimulante del sistema inmune.' },
+  { id: 'menta', name: 'Menta Piperita', price: 3500, category: 'plantas', image: 'menta', description: 'Digestiva y refrescante.' },
+  { id: 'calendula', name: 'Caléndula', price: 4900, category: 'plantas', image: 'calendula', description: 'Cicatrizante y calmante para la piel.' },
+  { id: 'serum', name: 'Sérum Jojoba & Ricino', price: 12500, category: 'belleza', image: 'serum', description: 'Hidratación profunda y antienvejecimiento.' },
+  { id: 'aceite-facial', name: 'Aceite Rosa Mosqueta', price: 15900, category: 'belleza', image: 'aceite facial', description: 'Regenerador celular para manchas y cicatrices.' },
+  { id: 'jabon-avena', name: 'Jabón Avena & Miel', price: 7200, category: 'belleza', image: 'jabón_avena', description: 'Limpieza suave para piel sensible.' },
+  { id: 'toner', name: 'Tónico Hamamelis & Aloe', price: 9800, category: 'belleza', image: 'toner', description: 'Equilibra el pH y reduce los poros.' },
+  { id: 'mascarilla', name: 'Mascarilla Arcilla & Espirulina', price: 8900, category: 'belleza', image: 'mascarilla', description: 'Purificante y nutritiva.' },
+  { id: 'balsamo', name: 'Bálsamo Coco & Mango', price: 4800, category: 'belleza', image: 'bálsamo', description: 'Hidratante intensivo para labios y cutículas.' },
+  { id: 'aceite-corporal', name: 'Aceite Corp. Almendras & Lavanda', price: 10500, category: 'belleza', image: 'aceite corporal', description: 'Suaviza y nutre la piel corporal.' },
+  { id: 'jabon-carbon', name: 'Jabón Carbón Activado', price: 7500, category: 'belleza', image: 'jabón_carbón', description: 'Desintoxicante profundo para piel grasa.' }
+]

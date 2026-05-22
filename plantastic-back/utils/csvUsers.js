@@ -4,11 +4,10 @@ const csv = require('csv-parser')
 const { createObjectCsvWriter } = require('csv-writer')
 
 const CSV_PATH = path.join(__dirname, '../data/Users.csv')
-const HEADERS = ['name', 'lastname', 'email', 'phone', 'password']
+const HEADERS = ['name', 'lastname', 'email', 'phone', 'password', 'provincia', 'direccion', 'codigoPostal']
 
 function readUsers() {
   return new Promise((resolve, reject) => {
-    // if the file doesn't exist, return an empty list
     if (!fs.existsSync(CSV_PATH)) {
       return resolve([])
     }
@@ -41,4 +40,13 @@ async function searchByEmail(email) {
   return users.find(u => u.email === email) || null
 }
 
-module.exports = { readUsers, writeUsers, addUser, searchByEmail }
+async function updateUser(email, updatedFields) {
+  const users = await readUsers()
+  const idx = users.findIndex(u => u.email === email)
+  if (idx === -1) return null
+  users[idx] = { ...users[idx], ...updatedFields }
+  await writeUsers(users)
+  return users[idx]
+}
+
+module.exports = { readUsers, writeUsers, addUser, searchByEmail, updateUser }

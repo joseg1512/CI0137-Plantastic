@@ -5,63 +5,55 @@
 
     <div class="products-container">
       <ProductCard
-        v-for="(product, index) in products"
-        :key="index"
-        :badge="product.badge"
-        :icon="product.icon"
-        :category="product.category"
-        :title="product.title"
-        :description="product.description"
-        :price="product.price"
+        v-for="p in featuredProducts"
+        :key="p.id"
+        :product="p"
+        :badge="p.badge"
+        @add-to-cart="handleAddToCart"
       />
     </div>
   </section>
 </template>
 
 <script>
-import ProductCard from './ProductCard.vue';
+import ProductCard from './ProductCard.vue'
+import { productos } from '@/data/productos.js'
+import { useCartStore } from '@/stores/useCartStore'
+import { useAuthStore } from '@/stores/useAuthStore'
+import { useToast } from '@/composables/useToast'
+
+const FEATURED = [
+  { id: 'lavanda', badge: 'Bestseller' },
+  { id: 'serum', badge: '' },
+  { id: 'equinacea', badge: '' },
+  { id: 'aceite-facial', badge: 'Nuevo' }
+]
 
 export default {
   name: 'FeaturedProducts',
-  components: {
-    ProductCard
+  components: { ProductCard },
+  setup() {
+    const cartStore = useCartStore()
+    const authStore = useAuthStore()
+    const { showToast } = useToast()
+    return { cartStore, authStore, showToast }
   },
-  data() {
-    return {
-      products: [
-        {
-          badge: 'Bestseller',
-          icon: '🌿',
-          category: 'PLANTA MEDICINAL',
-          title: 'Lavanda Orgánica',
-          description: 'Ideal para relajación y mejor sueño',
-          price: '₡5,800'
-        },
-        {
-          badge: '',
-          icon: '🧴',
-          category: 'BELLEZA ECOLÓGICA',
-          title: 'Sérum Jojoba & Ricino',
-          description: 'Hidratación profunda para rostro',
-          price: '₡12,500'
-        },
-        {
-          badge: '',
-          icon: '🌸',
-          category: 'PLANTA MEDICINAL',
-          title: 'Equinácea',
-          description: 'Fortalece el sistema inmunológico',
-          price: '₡6,200'
-        },
-        {
-          badge: 'Nuevo',
-          icon: '🧴',
-          category: 'BELLEZA ECOLÓGICA',
-          title: 'Aceite Rosa Mosqueta',
-          description: 'Regeneración celular y cicatrices',
-          price: '₡15,900'
-        }
-      ]
+  computed: {
+    featuredProducts() {
+      return FEATURED.map(f => {
+        const p = productos.find(p => p.id === f.id)
+        return p ? { ...p, badge: f.badge } : null
+      }).filter(Boolean)
+    }
+  },
+  methods: {
+    async handleAddToCart(producto) {
+      if (!this.authStore.isLoggedIn) {
+        this.$router.push('/login')
+        return
+      }
+      await this.cartStore.addItem(producto)
+      this.showToast(`¡${producto.name} agregado al carrito!`)
     }
   }
 }

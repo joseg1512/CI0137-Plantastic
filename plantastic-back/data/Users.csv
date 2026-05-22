@@ -1,1 +1,2 @@
-name,lastname,email,phone,password
+name,lastname,email,phone,password,provincia,direccion,codigoPostal
+Camila,Rgz,camila.rodriguezaguila@ucr.ac.cr,70553656,$2b$10$d4C3v9gM1zUng.uxSxmIPur.CoQFKScLwa0cNjSRke/oFIie/Ho92,,,
