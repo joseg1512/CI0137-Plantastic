@@ -19,7 +19,7 @@ const sessionMiddleware = session({
     httpOnly: true,
     sameSite: 'lax',
     secure: process.env.NODE_ENV === 'production',
-    maxAge: 1000 * 60 * 60 * 2  // 2 horas, en ms
+    maxAge: parseInt(process.env.SESSION_MAX_AGE) || 1000 * 60 * 60 * 2  // 2 horas, en ms
   }
 })
 
