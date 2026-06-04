@@ -23,14 +23,19 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to) => {
+router.beforeEach(async (to) => {
   document.title = to.meta?.title || 'Plantastic'
 
-  if (to.name === 'perfil') {
-    const authStore = useAuthStore()
-    if (!authStore.isLoggedIn) {
-      return { name: 'login' }
-    }
+  const authStore = useAuthStore()
+
+  if (!authStore.checked) {
+    await authStore.checkSession()
+  }
+
+  const protectedRoutes = ['perfil', 'user']
+
+  if (protectedRoutes.includes(to.name) && !authStore.isLoggedIn) {
+    return { name: 'login' }
   }
 })
 
