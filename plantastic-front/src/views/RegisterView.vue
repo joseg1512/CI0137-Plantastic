@@ -115,7 +115,7 @@ export default {
         password: () => !f.password ? 'La contraseña es obligatoria.' : f.password.length < 8 ? 'Mínimo 8 caracteres.' : null,
         password2: () => !f.password2 ? 'Confirma la contraseña.' : f.password2 !== f.password ? 'Las contraseñas no coinciden.' : null
       }
-      const msg = rules[field]?.()
+      const msg = rules[field] ? rules[field]() : null
       if (msg) e[field] = msg
       else delete e[field]
       this.fieldErrors = e

@@ -142,7 +142,21 @@
                   <span v-else-if="paymentValid.cvv" class="field-valid">✓</span>
                 </div>
               </div>
+
+              <div class="form-group">
+                <label class="form-label">Moneda</label>
+                <select v-model="payment.currency" class="form-input"
+                  :class="getPaymentFieldClass('currency')"
+                  @change="validatePaymentField('currency')">
+                  <option value="colones">Colones</option>
+                  <option value="dolares">Dólares</option>
+                </select>
+                <span v-if="paymentErrors.currency" class="field-error">{{ paymentErrors.currency }}</span>
+                <span v-else-if="paymentValid.currency" class="field-valid">✓</span>
+              </div>
             </div>
+
+            <p v-if="paymentFeedback" class="payment-feedback">{{ paymentFeedback }}</p>
 
             <div class="modal-footer">
               <button class="modal-btn-secondary" @click="step = 1">Volver</button>
@@ -167,6 +181,9 @@
               </div>
               <div class="payment-summary-line">
                 <span>Envío</span><span>₡{{ cartStore.shipping.toLocaleString('es-CR') }}</span>
+              </div>
+              <div class="payment-summary-line">
+                <span>Moneda</span><span>{{ currencyLabel }}</span>
               </div>
               <div class="payment-summary-line payment-summary-total">
                 <span>Total</span><span>₡{{ cartStore.total.toLocaleString('es-CR') }}</span>
@@ -215,6 +232,7 @@
 <script>
 import { useCartStore } from '@/stores/useCartStore'
 import { useAuthStore } from '@/stores/useAuthStore'
+import { useToast } from '@/composables/useToast'
 
 export default {
   name: 'CheckoutModal',
@@ -222,7 +240,8 @@ export default {
   setup() {
     const cartStore = useCartStore()
     const authStore = useAuthStore()
-    return { cartStore, authStore }
+    const { showToast } = useToast()
+    return { cartStore, authStore, showToast }
   },
   data() {
     return {
@@ -231,12 +250,13 @@ export default {
       orderNumber: '',
       confirmedItems: [],
       confirmedTotal: 0,
+      paymentFeedback: '',
 
       shipping: { fullName: '', email: '', phone: '', province: '', address: '', zip: '' },
       shippingErrors: {},
       shippingValid: {},
 
-      payment: { cardNumber: '', holder: '', expiry: '', cvv: '' },
+      payment: { cardNumber: '', holder: '', expiry: '', cvv: '', currency: 'colones' },
       paymentErrors: {},
       paymentValid: {}
     }
@@ -255,24 +275,49 @@ export default {
     prefilled.forEach(f => {
       if (this.shipping[f]) this.validateShippingField(f)
     })
+
+    this.validatePaymentField('currency')
   },
   computed: {
     cardBrand() {
-      const n = this.payment.cardNumber.replace(/\s/g, '')
-      if (n.startsWith('4')) return 'Visa'
-      if (n.startsWith('5')) return 'Mastercard'
+      const n = this.payment.cardNumber.replace(/\D/g, '')
+      if (/^3[47]/.test(n)) return 'Amex'
+      if (/^4/.test(n)) return 'Visa'
+      if (/^5[1-5]/.test(n) || /^2[2-7]/.test(n)) return 'Mastercard'
       return ''
+    },
+    currencyLabel() {
+      return this.payment.currency === 'dolares' ? 'Dólares (USD)' : 'Colones (CRC)'
     },
     shippingFormValid() {
       const fields = ['fullName', 'email', 'phone', 'province', 'address', 'zip']
       return fields.every(f => this.shippingValid[f] && !this.shippingErrors[f])
     },
     paymentFormValid() {
-      const fields = ['cardNumber', 'holder', 'expiry', 'cvv']
+      const fields = ['cardNumber', 'holder', 'expiry', 'cvv', 'currency']
       return fields.every(f => this.paymentValid[f] && !this.paymentErrors[f])
     }
   },
   methods: {
+    getCardBrand(cardNumber) {
+      const digits = String(cardNumber || '').replace(/\D/g, '')
+      if (/^3[47]/.test(digits)) return 'amex'
+      if (/^4/.test(digits)) return 'visa'
+      if (/^5[1-5]/.test(digits) || /^2[2-7]/.test(digits)) return 'mastercard'
+      return ''
+    },
+    getCardNumberLength(cardNumber) {
+      const brand = this.getCardBrand(cardNumber)
+      if (brand === 'amex') return 15
+      if (brand === 'visa' || brand === 'mastercard') return 16
+      return 16
+    },
+    getCvvLength(cardNumber) {
+      const brand = this.getCardBrand(cardNumber)
+      if (brand === 'amex') return 4
+      if (brand === 'visa' || brand === 'mastercard') return 3
+      return 0
+    },
     getFieldClass(field) {
       if (this.shippingErrors[field]) return 'input-error'
       if (this.shippingValid[field]) return 'input-valid'
@@ -296,7 +341,7 @@ export default {
         address: () => s.address.trim().length < 10 ? 'Mínimo 10 caracteres.' : null,
         zip: () => !/^\d{5}$/.test(s.zip) ? 'Debe tener exactamente 5 dígitos.' : null
       }
-      const err = rules[field]?.()
+      const err = rules[field] ? rules[field]() : null
       if (err) { e[field] = err; delete v[field] }
       else { delete e[field]; v[field] = true }
       this.shippingErrors = e
@@ -308,7 +353,14 @@ export default {
       const e = { ...this.paymentErrors }
       const p = this.payment
       const rules = {
-        cardNumber: () => p.cardNumber.replace(/\s/g, '').length !== 16 ? 'Debe tener 16 dígitos.' : null,
+        cardNumber: () => {
+          const digits = p.cardNumber.replace(/\D/g, '')
+          const brand = this.getCardBrand(digits)
+          if (!brand) return 'Ingresa una tarjeta Visa, Mastercard o Amex válida.'
+          const expectedLength = this.getCardNumberLength(digits)
+          if (digits.length !== expectedLength) return `Debe tener ${expectedLength} dígitos.`
+          return null
+        },
         holder: () => !(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(p.holder)) || p.holder.trim().length < 3 ? 'Solo letras, mínimo 3 caracteres.' : null,
         expiry: () => {
           const match = p.expiry.match(/^(\d{2})\/(\d{2})$/)
@@ -316,13 +368,24 @@ export default {
           const month = parseInt(match[1])
           const year = parseInt(match[2]) + 2000
           if (month < 1 || month > 12) return 'Mes inválido (01–12).'
-          const now = new Date()
-          if (year < now.getFullYear() || (year === now.getFullYear() && month < now.getMonth() + 1)) return 'Tarjeta vencida.'
+          const expiryDate = new Date(year, month, 0, 23, 59, 59, 999)
+          const minimumValidDate = new Date()
+          minimumValidDate.setMonth(minimumValidDate.getMonth() + 1)
+          minimumValidDate.setDate(0)
+          minimumValidDate.setHours(0, 0, 0, 0)
+          if (expiryDate < minimumValidDate) return 'La tarjeta debe vencer al menos un mes después de hoy.'
           return null
         },
-        cvv: () => !/^\d{3,4}$/.test(p.cvv) ? 'El CVV debe tener 3 o 4 dígitos.' : null
+        cvv: () => {
+          const digits = p.cvv.replace(/\D/g, '')
+          const expectedLength = this.getCvvLength(p.cardNumber)
+          if (!expectedLength) return 'Ingresa primero un número de tarjeta válido.'
+          if (digits.length !== expectedLength) return `El CVC debe tener ${expectedLength} dígitos.`
+          return null
+        },
+        currency: () => !['colones', 'dolares'].includes(p.currency) ? 'La moneda debe ser colones o dólares.' : null
       }
-      const err = rules[field]?.()
+      const err = rules[field] ? rules[field]() : null
       if (err) { e[field] = err; delete v[field] }
       else { delete e[field]; v[field] = true }
       this.paymentErrors = e
@@ -330,8 +393,10 @@ export default {
     },
 
     formatCardNumber(e) {
-      let val = e.target.value.replace(/\D/g, '').slice(0, 16)
-      this.payment.cardNumber = val.replace(/(.{4})/g, '$1 ').trim()
+      const digits = e.target.value.replace(/\D/g, '')
+      const maxLength = this.getCardNumberLength(digits)
+      const sliced = digits.slice(0, maxLength)
+      this.payment.cardNumber = sliced.replace(/(.{4})/g, '$1 ').trim()
     },
 
     formatExpiry(e) {
@@ -341,17 +406,46 @@ export default {
     },
 
     async confirmPayment() {
-      ['cardNumber', 'holder', 'expiry', 'cvv'].forEach(f => this.validatePaymentField(f))
+      this.paymentFeedback = ''
+      ;['cardNumber', 'holder', 'expiry', 'cvv', 'currency'].forEach(f => this.validatePaymentField(f))
       if (!this.paymentFormValid) return
 
-      this.confirmedItems = [...this.cartStore.items]
-      this.confirmedTotal = this.cartStore.total
-      this.orderNumber = '#' + Math.floor(100000 + Math.random() * 900000)
-
       this.isProcessing = true
-      await new Promise(resolve => setTimeout(resolve, 1500))
-      this.isProcessing = false
-      this.step = 3
+      try {
+        const res = await fetch('/api/payments', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({
+            cardNumber: this.payment.cardNumber,
+            holder: this.payment.holder,
+            expiry: this.payment.expiry,
+            cvc: this.payment.cvv,
+            currency: this.payment.currency,
+            amount: this.cartStore.total
+          })
+        })
+
+        const data = await res.json()
+        if (!res.ok || !data.approved) {
+          const message = (data.reasons && data.reasons[0]) || data.message || 'Pago rechazado.'
+          this.paymentFeedback = message
+          this.showToast(message)
+          return
+        }
+
+        this.confirmedItems = [...this.cartStore.items]
+        this.confirmedTotal = this.cartStore.total
+        this.orderNumber = data.transactionId || `#${Math.floor(100000 + Math.random() * 900000)}`
+        await this.cartStore.clearCart()
+        this.step = 3
+        this.showToast('Pago aprobado')
+      } catch (error) {
+        this.paymentFeedback = 'No fue posible procesar el pago en este momento.'
+        this.showToast(this.paymentFeedback)
+      } finally {
+        this.isProcessing = false
+      }
     },
 
     async handleClose() {
@@ -579,6 +673,12 @@ h2, h3, button {
   border-top: 1px solid #C9DECC;
   padding-top: 8px;
   margin-top: 4px;
+}
+
+.payment-feedback {
+  margin-top: 8px;
+  color: #B23B3B;
+  font-size: 0.92rem;
 }
 
 .card-brand {

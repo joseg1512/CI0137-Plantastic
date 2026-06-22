@@ -1,16 +1,16 @@
 const session = require('express-session')
-const { createClient } = require('redis')
-const { RedisStore } = require('connect-redis')
+// const { createClient } = require('redis')
+// const { RedisStore } = require('connect-redis')
 
-const redisClient = createClient({
-  url: process.env.REDIS_URL
-})
+// const redisClient = createClient({
+//   url: process.env.REDIS_URL
+// })
 
-redisClient.connect().catch(console.error)
+// redisClient.connect().catch(console.error)
 
 const sessionMiddleware = session({
-  store: new RedisStore({ client: redisClient }),
-  secret: process.env.SESSION_SECRET,
+  // store: new RedisStore({ client: redisClient }),
+  secret: process.env.SESSION_SECRET || 'dev-secret',
   name: 'sid',
   resave: false,
   saveUninitialized: false,
