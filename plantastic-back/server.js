@@ -1,8 +1,10 @@
 require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
-const session = require('express-session')
+const helmet = require('helmet')
+const rateLimit = require('express-rate-limit')
 const sessionMiddleware = require('./config/session')
+const sanitizeInputs = require('./config/sanitize')
 const usersRouter = require('./routes/users')
 const cartRouter = require('./routes/cart')
 const paymentsRouter = require('./routes/payments')
@@ -10,12 +12,47 @@ const paymentsRouter = require('./routes/payments')
 const app = express()
 const PORT = process.env.PORT || 3000
 
+const allowedOrigins = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim())
+  : ['http://localhost:8080']
+
+app.use(helmet())
+
 app.use(cors({
-  origin: 'http://localhost:8080',
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
   credentials: true
 }))
-app.use(express.json())
+
+app.use(express.json({ limit: '10kb' }))
+app.use(sanitizeInputs)
+
+const globalLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: 'Too many requests, please try again later.' }
+})
+
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: 'Too many login attempts, please try again later.' }
+})
+
+app.use(globalLimiter)
 app.use(sessionMiddleware)
+
+app.use('/api/users/login', authLimiter)
+app.use('/api/users/register', authLimiter)
 
 app.use('/api/users', usersRouter)
 app.use('/api/cart', cartRouter)
