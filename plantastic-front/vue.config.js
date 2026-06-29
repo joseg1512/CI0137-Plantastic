@@ -4,7 +4,7 @@ module.exports = defineConfig({
   devServer: {
     proxy: {
       '/api': {
-        target: 'http://localhost:3000',
+        target: 'https://ci0137-plantastic-production.up.railway.app',
         changeOrigin: true
       }
     }
