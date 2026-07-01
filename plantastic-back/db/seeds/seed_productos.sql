@@ -1,0 +1,20 @@
+INSERT INTO productos (slug, name, price, category, image, description, stock) VALUES
+('lavanda', 'Lavanda Orgánica', 5800, 'plantas', 'lavanda', 'Relajante natural, ideal para el estrés y el sueño.', 50),
+('manzanilla', 'Manzanilla Alemana', 4500, 'plantas', 'manzanilla', 'Antiinflamatoria y digestiva.', 50),
+('eucalipto', 'Eucalipto', 4200, 'plantas', 'eucalipto', 'Expectorante natural para vías respiratorias.', 50),
+('aloe', 'Aloe Vera Gel', 7900, 'plantas', 'aloe', 'Hidratante y regenerador de piel.', 50),
+('jengibre', 'Jengibre', 3800, 'plantas', 'jengibre', 'Antiinflamatorio y digestivo.', 50),
+('valeriana', 'Valeriana', 6500, 'plantas', 'valeriana', 'Sedante natural para el insomnio.', 50),
+('curcuma', 'Cúrcuma', 5200, 'plantas', 'curcuma', 'Potente antiinflamatorio y antioxidante.', 50),
+('equinacea', 'Equinácea', 6200, 'plantas', 'equinacea', 'Estimulante del sistema inmune.', 50),
+('menta', 'Menta Piperita', 3500, 'plantas', 'menta', 'Digestiva y refrescante.', 50),
+('calendula', 'Caléndula', 4900, 'plantas', 'calendula', 'Cicatrizante y calmante para la piel.', 50),
+('serum', 'Sérum Jojoba & Ricino', 12500, 'belleza', 'serum', 'Hidratación profunda y antienvejecimiento.', 50),
+('aceite-facial', 'Aceite Rosa Mosqueta', 15900, 'belleza', 'aceite facial', 'Regenerador celular para manchas y cicatrices.', 50),
+('jabon-avena', 'Jabón Avena & Miel', 7200, 'belleza', 'jabón_avena', 'Limpieza suave para piel sensible.', 50),
+('toner', 'Tónico Hamamelis & Aloe', 9800, 'belleza', 'toner', 'Equilibra el pH y reduce los poros.', 50),
+('mascarilla', 'Mascarilla Arcilla & Espirulina', 8900, 'belleza', 'mascarilla', 'Purificante y nutritiva.', 50),
+('balsamo', 'Bálsamo Coco & Mango', 4800, 'belleza', 'bálsamo', 'Hidratante intensivo para labios y cutículas.', 50),
+('aceite-corporal', 'Aceite Corp. Almendras & Lavanda', 10500, 'belleza', 'aceite corporal', 'Suaviza y nutre la piel corporal.', 50),
+('jabon-carbon', 'Jabón Carbón Activado', 7500, 'belleza', 'jabón_carbón', 'Desintoxicante profundo para piel grasa.', 50)
+ON CONFLICT (slug) DO NOTHING;

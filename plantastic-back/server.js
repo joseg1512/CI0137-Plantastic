@@ -7,7 +7,9 @@ const sessionMiddleware = require('./config/session')
 const sanitizeInputs = require('./config/sanitize')
 const usersRouter = require('./routes/users')
 const cartRouter = require('./routes/cart')
+const productsRouter = require('./routes/products')
 const paymentsRouter = require('./routes/payments')
+const ordersRouter = require('./routes/orders')
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -58,7 +60,9 @@ app.use('/api/users/register', authLimiter)
 
 app.use('/api/users', usersRouter)
 app.use('/api/cart', cartRouter)
+app.use('/api/products', productsRouter)
 app.use('/api/payments', paymentsRouter)
+app.use('/api/orders', ordersRouter)
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`)

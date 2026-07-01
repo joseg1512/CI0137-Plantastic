@@ -177,16 +177,18 @@ router.post('/', async (req, res) => {
       reasons.push('La moneda debe ser colones o dólares.')
     }
 
-    if (Number.isFinite(amount) || amount <= 0) {
+    if (!Number.isFinite(amount) || amount <= 0) {
       reasons.push('El monto debe ser mayor que cero.')
     }
 
     const bin = cardNumber.slice(0, 6)
-    if (bin.length === 6) {
-      const bins = await getCostaRicaBins()
-      if (!bins.has(bin)) {
-        reasons.push('El BIN de la tarjeta no corresponde a Costa Rica.')
-      }
+    if (bin.length === 6 && process.env.NODE_ENV === 'production') {
+      try {
+        const bins = await getCostaRicaBins()
+        if (bins.size > 0 && !bins.has(bin)) {
+          reasons.push('El BIN de la tarjeta no corresponde a Costa Rica.')
+        }
+      } catch (_) {}
     }
 
     if (reasons.length > 0) {

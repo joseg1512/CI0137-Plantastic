@@ -1,6 +1,6 @@
 const express = require('express')
 const bcrypt = require('bcrypt')
-const { addUser, searchByEmail, updateUser } = require('../utils/csvUsers')
+const userRepository = require('../repositories/userRepository')
 
 const router = express.Router()
 const SALT_ROUNDS = 10
@@ -26,14 +26,14 @@ router.post('/register', async (req, res) => {
       return res.status(400).json({ message: 'El teléfono debe tener exactamente 8 dígitos.' })
     }
 
-    const exists = await searchByEmail(email)
+    const exists = await userRepository.findByEmail(email)
     if (exists) {
       return res.status(409).json({ message: 'Ya existe una cuenta con ese correo electrónico.' })
     }
 
     const hash = await bcrypt.hash(password, SALT_ROUNDS)
 
-    await addUser({
+    await userRepository.create({
       name: name.trim(),
       lastname: lastname.trim(),
       email: email.trim().toLowerCase(),
@@ -57,7 +57,7 @@ router.post('/login', async (req, res) => {
       return res.status(400).json({ message: 'Correo y contraseña son obligatorios.' })
     }
 
-    const usuario = await searchByEmail(email.trim().toLowerCase())
+    const usuario = await userRepository.findByEmail(email.trim().toLowerCase())
 
     if (!usuario) {
       return res.status(401).json({ message: 'Correo electrónico o contraseña incorrectos.' })
@@ -111,7 +111,7 @@ router.put('/profile', async (req, res) => {
       return res.status(400).json({ message: 'El teléfono debe tener exactamente 8 dígitos.' })
     }
 
-    const updated = await updateUser(req.session.user.email, {
+    const updated = await userRepository.updateByEmail(req.session.user.email, {
       name: name.trim(),
       lastname: lastname.trim(),
       phone: phone ? phone.trim() : ''
@@ -137,7 +137,7 @@ router.put('/address', async (req, res) => {
       return res.status(400).json({ message: 'El código postal debe tener 5 dígitos.' })
     }
 
-    const updated = await updateUser(req.session.user.email, {
+    const updated = await userRepository.updateByEmail(req.session.user.email, {
       provincia: provincia || '',
       direccion: direccion || '',
       codigoPostal: codigoPostal || ''

@@ -108,6 +108,34 @@
           </div>
         </div>
       </div>
+      <div v-if="orders.length" class="perfil-section card-base">
+        <div class="perfil-section-header">
+          <h2 class="perfil-section-title">Historial de compras</h2>
+        </div>
+
+        <div class="orders-list">
+          <div v-for="order in orders" :key="order.id" class="order-card">
+            <div class="order-header">
+              <span class="order-id">Pedido #{{ order.id }}</span>
+              <span class="order-state">{{ order.estado }}</span>
+            </div>
+            <div class="order-items">
+              <div v-for="item in order.items" :key="item.product_name" class="order-item">
+                <span>{{ item.product_name }} × {{ item.quantity }}</span>
+                <span>₡{{ item.subtotal.toLocaleString('es-CR') }}</span>
+              </div>
+            </div>
+            <div class="order-total">
+              <span>Total</span>
+              <span>₡{{ order.total.toLocaleString('es-CR') }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p v-else-if="ordersLoaded" class="orders-empty">Aún no tienes compras realizadas.</p>
+
+      <p v-if="ordersError" class="field-error">{{ ordersError }}</p>
     </div>
   </section>
 </template>
@@ -133,7 +161,11 @@ export default {
       savingAddress: false,
       addressError: '',
       addressSuccess: '',
-      address: { provincia: '', direccion: '', codigoPostal: '' }
+      address: { provincia: '', direccion: '', codigoPostal: '' },
+
+      orders: [],
+      ordersLoaded: false,
+      ordersError: ''
     }
   },
   mounted() {
@@ -151,6 +183,7 @@ export default {
         codigoPostal: u.codigoPostal || ''
       }
     }
+    this.fetchOrders()
   },
   methods: {
     startEditPersonal() {
@@ -227,6 +260,18 @@ export default {
         this.addressError = err.message
       } finally {
         this.savingAddress = false
+      }
+    },
+
+    async fetchOrders() {
+      try {
+        const res = await fetch('/api/orders', { credentials: 'include' })
+        if (!res.ok) return
+        this.orders = await res.json()
+      } catch (err) {
+        this.ordersError = 'No se pudo cargar el historial.'
+      } finally {
+        this.ordersLoaded = true
       }
     }
   }
@@ -374,6 +419,70 @@ export default {
 .field-success {
   color: #2E7D32;
   font-size: 0.82rem;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.order-card {
+  border: 1px solid #C9DECC;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.order-id {
+  font-weight: 600;
+  color: #1B3A29;
+  font-size: 0.9rem;
+}
+
+.order-state {
+  font-size: 0.8rem;
+  background: #EDE8DC;
+  color: #3A6644;
+  padding: 2px 10px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.order-items {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #1C1C1C;
+}
+
+.order-total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #1B3A29;
+  border-top: 1px solid #C9DECC;
+  padding-top: 8px;
+}
+
+.orders-empty {
+  color: #717171;
+  font-size: 0.9rem;
+  text-align: center;
 }
 
 @media (max-width: 600px) {

@@ -80,20 +80,24 @@
 <script>
 import { useAuthStore } from '@/stores/useAuthStore'
 import { useCartStore } from '@/stores/useCartStore'
-import { productos } from '@/data/productos.js'
+import { useProductStore } from '@/stores/useProductStore'
 
 export default {
   name: 'NavbarComponent',
   setup() {
     const authStore = useAuthStore()
     const cartStore = useCartStore()
-    return { authStore, cartStore }
+    const productStore = useProductStore()
+    return { authStore, cartStore, productStore }
   },
   data() {
     return {
       searchQuery: '',
       showDropdown: false
     }
+  },
+  created() {
+    this.productStore.fetchProducts()
   },
   computed: {
     userInitial() {
@@ -103,7 +107,7 @@ export default {
     suggestions() {
       const q = this.searchQuery.trim().toLowerCase()
       if (q.length < 2) return []
-      return productos
+      return this.productStore.products
         .filter(p => p.name.toLowerCase().includes(q))
         .slice(0, 6)
     }

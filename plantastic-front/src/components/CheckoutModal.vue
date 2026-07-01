@@ -437,6 +437,28 @@ export default {
         this.confirmedItems = [...this.cartStore.items]
         this.confirmedTotal = this.cartStore.total
         this.orderNumber = data.transactionId || `#${Math.floor(100000 + Math.random() * 900000)}`
+
+        try {
+          await fetch('/api/orders', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({
+              subtotal: this.cartStore.subtotal,
+              shipping: this.cartStore.shipping,
+              total: this.cartStore.total,
+              currency: this.payment.currency,
+              transactionId: data.transactionId,
+              provincia: this.shipping.province,
+              direccion: this.shipping.address,
+              codigoPostal: this.shipping.zip,
+              phone: this.shipping.phone
+            })
+          })
+        } catch (_) {
+          // order creation is best-effort, don't block checkout flow
+        }
+
         await this.cartStore.clearCart()
         this.step = 3
         this.showToast('Pago aprobado')

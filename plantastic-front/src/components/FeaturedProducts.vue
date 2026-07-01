@@ -17,7 +17,7 @@
 
 <script>
 import ProductCard from './ProductCard.vue'
-import { productos } from '@/data/productos.js'
+import { useProductStore } from '@/stores/useProductStore'
 import { useCartStore } from '@/stores/useCartStore'
 import { useAuthStore } from '@/stores/useAuthStore'
 import { useToast } from '@/composables/useToast'
@@ -35,13 +35,17 @@ export default {
   setup() {
     const cartStore = useCartStore()
     const authStore = useAuthStore()
+    const productStore = useProductStore()
     const { showToast } = useToast()
-    return { cartStore, authStore, showToast }
+    return { cartStore, authStore, productStore, showToast }
+  },
+  created() {
+    this.productStore.fetchProducts()
   },
   computed: {
     featuredProducts() {
       return FEATURED.map(f => {
-        const p = productos.find(p => p.id === f.id)
+        const p = this.productStore.products.find(p => p.id === f.id)
         return p ? { ...p, badge: f.badge } : null
       }).filter(Boolean)
     }
