@@ -182,13 +182,15 @@ router.post('/', async (req, res) => {
     }
 
     const bin = cardNumber.slice(0, 6)
-    if (bin.length === 6 && process.env.NODE_ENV === 'production') {
+    if (bin.length === 6) {
       try {
         const bins = await getCostaRicaBins()
         if (bins.size > 0 && !bins.has(bin)) {
           reasons.push('El BIN de la tarjeta no corresponde a Costa Rica.')
         }
-      } catch (_) {}
+      } catch (_) {
+        // bincheck.org no disponible, no bloquear la transacción
+      }
     }
 
     if (reasons.length > 0) {
