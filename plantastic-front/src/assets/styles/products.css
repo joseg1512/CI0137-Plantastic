@@ -1,6 +1,7 @@
 .productos-destacados {
   padding: 60px 10%;
   background-color: var(--color-background);
+  scroll-margin-top: 90px;
 }
 
 .section-title {

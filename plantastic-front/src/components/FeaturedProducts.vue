@@ -1,5 +1,5 @@
 <template>
-  <section class="productos-destacados">
+  <section class="productos-destacados" id="featured-section">
     <h2 class="tag tag--lg tag--wide tag--bosque section-tag center">PRODUCTOS DESTACADOS</h2>
     <h3 class="font-serif section-title">Lo más popular</h3>
 

@@ -1,5 +1,5 @@
 <template>
-  <section class="ofrecemos">
+  <section class="ofrecemos" id="offers-section">
     <h2 class="tag tag--lg tag--wide tag--bosque section-tag">LO QUE OFRECEMOS</h2>
 
     <div class="cards-container">
