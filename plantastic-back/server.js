@@ -55,6 +55,10 @@ const authLimiter = rateLimit({
 app.use(globalLimiter)
 app.use(sessionMiddleware)
 
+app.get('/', (req, res) => {
+  res.json({ message: '¡Bienvenid@ a Plantastic!' })
+})
+
 app.use('/api/users/login', authLimiter)
 app.use('/api/users/register', authLimiter)
 
